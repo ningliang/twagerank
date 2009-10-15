@@ -1,0 +1,7 @@
+package twage_rank;
+
+import log_utils.ResultHandler;
+
+public class Initializer implements ResultHandler {
+
+}

@@ -1,0 +1,22 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class MatrixIterator implements ResultHandler {
+	private Int2DoubleOpenHashMap before;
+	private Int2IntOpenHashMap outDegrees;
+	private Int2DoubleOpenHashMap after = new Int2DoubleOpenHashMap();
+	
+	public MatrixIterator(Int2DoubleOpenHashMap before, Int2IntOpenHashMap outDegrees) {
+		this.before = before;
+		this.outDegrees = outDegrees;
+		
+		// Initialize with ALPHA * times average?
+	}
+	
+	public void handleResult(Result result) {
+		// Loop through results (they should all be valid). sum += before(id) * (1 / outDegree(id))
+		// 
+	}
+}

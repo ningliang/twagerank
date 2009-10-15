@@ -1,0 +1,61 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+
+import java.io.File;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import logutils.LogFile;
+
+public class TwageRank {
+	private static final Double MIN_DELTA = 0.000001;
+	
+	public static void main(String[] args) {
+		// Usage
+		if (args.length != 1) {
+			System.out.println("usage: TwageRank <dir>");
+			System.exit(1);
+		}
+		
+		// Ensure dir
+		File dir = new File(args[0]);
+		if (!dir.isDirectory()) {
+			System.out.println("Not a directory: " + dir.getAbsolutePath());
+			System.exit(1);
+		}
+		
+		// Get array of File
+		List<File> files = new LinkedList<File>();
+		for (File file : dir.listFiles()) if (file.getPath().endsWith(".txt")) files.add(file);
+				
+		// Mark start time
+		long start = new Date().getTime();
+		
+		// Initialize the vector
+		VectorInitializer initializer = new VectorInitializer();
+		try {
+			for (File file : files) {
+				LogFile log = new LogFile(file.getPath());
+				log.readAll(initializer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(1);
+		}
+
+		Int2DoubleOpenHashMap vector = initializer.getVector();
+		System.out.println("Vector has " + vector.size() + " values");
+		
+		// Iterate!
+		Double delta = Double.MAX_VALUE;
+		while (delta > MIN_DELTA) {
+			
+		}
+		
+		
+		// while 
+	}
+	
+}

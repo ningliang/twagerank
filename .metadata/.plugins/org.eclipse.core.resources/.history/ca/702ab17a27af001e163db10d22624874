@@ -1,0 +1,7 @@
+package twagerank;
+
+import logutils.ResultHandler;
+
+public class VectorTransformer implements ResultHandler {
+	
+}

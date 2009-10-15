@@ -1,0 +1,17 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import logutils.Result;
+
+public class VectorTransformer {
+	private Int2DoubleOpenHashMap rankVector = null;
+	private double squaredAcc = 0.0;
+	
+	public VectorTransformer(Int2DoubleOpenHashMap rankVector) { this.rankVector = rankVector; }
+	
+	public void handle(Result result) {
+		if (result.isSuccessful()) {
+			
+		}
+	}
+}

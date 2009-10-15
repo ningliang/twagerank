@@ -1,0 +1,57 @@
+package twagerank;
+
+import java.io.File;
+import java.io.IOException;
+
+import logutils.LogFile;
+import logutils.Result;
+
+public class PageRank {
+	File logDir;
+	String outPath;
+	
+	// Social graph
+	Int2ObjectOpenHashMap graph = new Int2ObjectOpenHashMap();
+	
+	public PageRank(String logPath, String outPath) {
+		this.outPath = outPath;
+		this.logDir = new File(logPath);
+	}
+	
+	public void run() {
+		try {
+			loadFile(logDir);
+			// Load files into memory
+			// Initiate page rank guesses, based on state
+			// Power method until epsilon reached
+			// Write state to file
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
+	
+	private void loadFile(File file) throws IOException {
+		if (file.isDirectory()) {
+			for (File subFile : file.listFiles()) loadFile(subFile);
+		} else {
+			if (file.toString().endsWith(".txt")) {
+				System.out.println("Processing " + file);
+				LogFile logFile = new LogFile(file.toString());
+				Result result = null;
+				while ((result = logFile.readResult()) != null) {
+					// TODO put in state
+				}
+			}
+		}
+	}
+	
+	public static void main(String[] args) {
+		if (args.length == 2) {
+			PageRank pageRank = new PageRank(args[0], args[1]);
+			pageRank.run();
+		} else {
+			System.out.println("Usage: logDir outFile");
+		}
+	}
+}

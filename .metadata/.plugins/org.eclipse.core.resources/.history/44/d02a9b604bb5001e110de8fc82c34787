@@ -1,0 +1,34 @@
+package pruner;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+
+public class Pruner {
+	public static void main(String[] args) {
+		// Usage
+		if (args.length != 1) {
+			System.out.println("usage: TwageRank <dir>");
+			System.exit(1);
+		}
+		
+		// Ensure dir
+		File dir = new File(args[0]);
+		if (!dir.isDirectory()) {
+			System.out.println("Not a directory: " + dir.getAbsolutePath());
+			System.exit(1);
+		}
+		
+		// Get array of File
+		List<File> files = new LinkedList<File>();
+		for (File file : dir.listFiles()) if (file.getPath().endsWith(".txt")) files.add(file);
+		
+	}
+	
+	// Pass 1
+		// Save all valid keys
+	// Pass 2
+		// Enqueue into writer that flushes every 10000
+		// Writer needs to increment file names every 1000000
+		
+}

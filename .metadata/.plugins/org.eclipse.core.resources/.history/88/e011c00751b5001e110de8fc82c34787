@@ -1,0 +1,90 @@
+package pruner;
+
+import it.unimi.dsi.fastutil.ints.Int2ByteOpenHashMap;
+
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class FilteringLogger implements ResultHandler {
+	private static final int FLUSH_THRESHOLD = 10000;
+	private static final int SEGMENT_THRESHOLD = 1000000;
+	
+	private String dir;
+	private int fileCount = 0;
+	private int writeCount = 0;
+	private long timeStamp = new Date().getTime();
+	private List<Result> writeQueue = new LinkedList<Result>();
+	
+	private Int2ByteOpenHashMap filterMap;
+	
+	private DataOutputStream out;
+	
+	public FilteringLogger(String dir, Int2ByteOpenHashMap filterMap) {
+		try {
+			this.dir = dir;
+			this.out = nextFile();
+			this.filterMap = filterMap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
+
+	public void handleResult(Result result) {
+		// Filtering - remove all invalid ids
+		if (filterMap.containsKey(result.getId())) {
+			List<Integer> validFollowers = new LinkedList<Integer>();
+			for (int id : result.getFollowerIds())
+		}
+		
+		if (result.isSuccessful()) {
+			// TODO filter out all ids that are not valid
+			this.writeQueue.add(result);
+			if (this.writeQueue.size() > FLUSH_THRESHOLD) {
+				for (Result queuedResult : writeQueue) {
+					try {
+						this.out.writeInt(queuedResult.getId());
+						this.out.writeInt(queuedResult.getStatus().toInt());
+						this.out.writeInt(queuedResult.getFollowerIds().length);
+						for (int id : queuedResult.getFollowerIds()) this.out.writeInt(id);
+						if (this.writeCount++ > SEGMENT_THRESHOLD) {
+							this.out.close();
+							this.out = nextFile();
+							this.writeCount = 0;
+						}
+					} catch (Exception e) {
+						e.printStackTrace();
+						System.exit(-1);
+					}
+				}
+			}
+		}		
+	}
+	
+	public void close() {
+		try {
+			this.out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
+	
+	private DataOutputStream nextFile() {
+		DataOutputStream retval = null;
+		try {
+			String next = dir + "/" + timeStamp + "_" + Integer.toString(fileCount++) + ".txt";
+			retval = new DataOutputStream(new FileOutputStream(next));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		return retval;
+	}
+}

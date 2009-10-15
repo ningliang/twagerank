@@ -1,0 +1,13 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class Initializer implements ResultHandler {
+
+	public void handleResult(Result result) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

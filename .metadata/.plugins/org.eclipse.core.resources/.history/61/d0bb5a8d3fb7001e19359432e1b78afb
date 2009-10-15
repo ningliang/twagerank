@@ -1,0 +1,59 @@
+package analysis;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.util.Collections;
+import java.util.Comparator;
+
+public class SortPrint {
+	public static void main(String[] args) {
+		if (args.length != 3) {
+			System.out.println("Usage: SortPrint <file> <start> <length>");
+			System.exit(1);
+		}
+		
+		Int2DoubleOpenHashMap state = null;
+		if (args.length == 3) {
+			System.out.println("Getting initial guess from file");
+			DataInputStream in = null;
+			state = new Int2DoubleOpenHashMap();
+			try {
+				in = new DataInputStream(new BufferedInputStream(new FileInputStream(args[0])));
+				while (in.available() > 0) {
+					int key = in.readInt();
+					double value = in.readDouble();
+					state.put(key, value);
+				}
+			} catch (IOException e) {
+				e.printStackTrace();
+				System.exit(1);
+			} finally {
+				if (in != null) {
+					try { in.close();
+					} catch (IOException e) { e.printStackTrace(); }
+				}
+			}
+			System.out.println("Read " + state.size() + " keys from file.");
+		}
+		
+		IntArrayList ids = new IntArrayList(state.size());
+		Collections.sort(ids, new PageRankComparator(state));
+	}
+}
+
+class PageRankComparator implements Comparator<Integer> {
+	Int2DoubleOpenHashMap ranks = null;
+	public PageRankComparator(Int2DoubleOpenHashMap ranks) { this.ranks = ranks; }
+	
+	public int compare(Integer o1, Integer o2) {
+		double first = ranks.get(o1);
+		double second = ranks.get(o2);
+		return Double.compare(first, second);
+	}
+	
+}

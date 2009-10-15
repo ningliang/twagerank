@@ -1,0 +1,31 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntOpenHashSet;
+import logutils.Result;
+
+// Encapsulates the matrix transformation per row
+public class VectorTransformer implements ResultHandler {
+	private Int2DoubleOpenHashMap oldRankVector = null;
+	private Int2DoubleOpenHashMap newRankVector = null;
+	private IntOpenHashSet pastInts = null;
+	private double squaredAcc = 0.0;
+	
+	public VectorTransformer(Int2DoubleOpenHashMap oldRankVector) { 
+		this.oldRankVector = oldRankVector;
+		this.newRankVector = new Int2DoubleOpenHashMap(oldRankVector.size());
+		this.pastInts = new IntOpenHashSet(oldRankVector.size());
+		
+		// Compute the random factor
+	}
+	
+	public void handle(Result result) {
+		if (result.isSuccessful() && !pastInts.contains(result.getId())) {
+			// Link matrix
+			// Random 
+			// Dangling
+		}
+	}
+	
+	public double getEpsilon() { return this.squaredAcc; }
+}

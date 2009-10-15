@@ -1,0 +1,12 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class Iterator implements ResultHandler {
+
+	public void handleResult(Result result) {
+		
+	}
+
+}

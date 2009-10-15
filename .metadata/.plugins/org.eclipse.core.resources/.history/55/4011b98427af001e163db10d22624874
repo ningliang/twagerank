@@ -1,0 +1,14 @@
+package twagerank;
+
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class VectorTransformer implements ResultHandler {
+	Int2DoubleOpenHashMap 
+	
+	public void handleResult(Result result) {
+		// TODO Auto-generated method stub
+		
+	}
+	
+}

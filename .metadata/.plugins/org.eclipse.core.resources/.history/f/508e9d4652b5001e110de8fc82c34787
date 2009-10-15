@@ -1,0 +1,39 @@
+package pruner;
+
+import java.io.File;
+import java.util.List;
+
+import logutils.LogFile;
+import utils.Utility;
+
+public class Pruner {
+	public static void main(String[] args) {
+		// Usage
+		if (args.length != 2) {
+			System.out.println("usage: Pruner <indir> <outdir>");
+			System.exit(1);
+		}
+		
+		// Get all valid ids
+		List<File> files = Utility.getFiles(args[0]);
+		IdentifierSet set = new IdentifierSet();
+		try {
+			for (File file : files) {
+				LogFile log = new LogFile(file.getPath());
+				log.readAll(set);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Done");
+		}
+		
+		// Second pass again, enqueue into writer that flushes periodically
+	}
+	
+	// Pass 1
+		// Save all valid keys
+	// Pass 2
+		// Enqueue into writer that flushes every 10000
+		// Writer needs to increment file names every 1000000
+		
+}

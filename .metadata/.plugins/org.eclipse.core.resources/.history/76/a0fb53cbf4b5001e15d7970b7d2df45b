@@ -1,0 +1,14 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class Iterator implements ResultHandler {
+	private Int2DoubleOpenHashMap before;
+	private Int2DoubleOpenHashMap after;
+	
+	public void handleResult(Result result) {
+		
+	}
+
+}

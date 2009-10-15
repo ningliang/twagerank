@@ -1,0 +1,18 @@
+package follower_histogram;
+
+public class FollowerHistogram {
+	public static void main(String[] args) {
+		if (args.length != 2) {
+			System.out.println("Usage: FollowerHistogram <bucket_size> <dir>");
+			System.exit(-1);
+		}
+		
+		int bucketSize = Integer.parseInt(args[0]);
+		if (bucketSize <= 0) {
+			System.out.println("Bucket size must be greater than or equal to 0.");
+			System.exit(-1);
+		}
+		
+		
+	}
+}

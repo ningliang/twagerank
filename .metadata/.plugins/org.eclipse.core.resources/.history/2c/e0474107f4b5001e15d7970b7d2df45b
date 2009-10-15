@@ -1,0 +1,21 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class Initializer implements ResultHandler {
+	Int2DoubleOpenHashMap probabilityMap = new Int2DoubleOpenHashMap();
+	Int2IntOpenHashMap outdegreeMap = new Int2IntOpenHashMap();
+	
+	public void handleResult(Result result) {
+		if (result.isSuccessful()) {
+			probabilityMap.put(result.getId(), 1.0);
+			if (!outdegreeMap.containsKey(result.getId()) outdegreeMap.put(result.getId(), 0);
+			outdegreeMap.put(result.getId(), outdegreeMap.get(result.getId() + 1));
+		}
+	}
+	
+	// public Int2DoubleOpenHashMap getProbabilityMap() {}
+	// public Int2IntOpenHashMap getOutDegreeMap() {}
+	
+}

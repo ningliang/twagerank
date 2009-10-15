@@ -1,0 +1,25 @@
+package pruner;
+
+import it.unimi.dsi.fastutil.ints.Int2ByteOpenHashMap;
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class IdentifierSet implements ResultHandler {
+	Int2ByteOpenHashMap idMap = new Int2ByteOpenHashMap();
+	private static final int LOG_THRESHOLD = 1000000;
+	
+	public void handleResult(Result result) {
+		if (result.isSuccessful()) {
+			idMap.put(result.getId(), (byte)1);
+			if (idMap.size() % LOG_THRESHOLD == 0) System.out.println(idMap.size() + " valid identifiers.");
+		}
+	}
+	
+	public Int2ByteOpenHashMap getSet() { 
+		return this.idMap; 
+	}
+	
+	public Boolean hasId(int id) {
+		return idMap.get(id) != 0;
+	}
+}

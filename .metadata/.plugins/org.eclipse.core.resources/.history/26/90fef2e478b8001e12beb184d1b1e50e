@@ -1,0 +1,27 @@
+package generator;
+
+import java.io.DataOutputStream;
+import java.io.IOException;
+
+import log_utils.Result;
+
+public class Generator {
+	public static void main(String[] args) {
+		Result result = new Result();
+		result.setId(1);
+		
+		// Generate the set of users
+		// Generate the results
+		// Write to file
+	}
+	
+	public static void writeResult(DataOutputStream out, Result result) throws IOException {
+		out.writeInt(result.getId());
+		out.writeInt(result.getStatus().toInt());
+		if (result.isSuccessful()) {
+			out.writeInt(result.getFollowerIds().length);
+			for (int id : result.getFollowerIds()) out.writeInt(id);
+		}
+		out.flush();
+	}
+}

@@ -1,0 +1,5 @@
+package twage_rank;
+
+public class Iterator implements ResultHandler {
+
+}

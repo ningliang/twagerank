@@ -1,0 +1,91 @@
+package twage_rank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import it.unimi.dsi.fastutil.ints.Int2IntOpenHashMap;
+
+import java.io.File;
+import java.util.Date;
+import java.util.List;
+
+import log_utils.LogFile;
+import utils.Utility;
+
+public class TwageRank {
+	private static final double MIN_DELTA = .001;
+	
+	public static void main(String[] args) {
+		if (args.length != 2) {
+			System.out.println("Usage: TwageRank <indir> <outfile>");
+			System.exit(1);
+		}
+		
+		List<File> files = Utility.getFiles(args[0]);
+		long start = new Date().getTime();
+		
+		// Initialize
+		Initializer initializer = new Initializer();
+		Int2DoubleOpenHashMap state =  new Int2DoubleOpenHashMap();
+		Int2IntOpenHashMap outDegrees = new Int2IntOpenHashMap();
+		try {
+			for (File file : files) {
+				LogFile log = new LogFile(file.getPath());
+				log.readAll(initializer);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		
+		// Get state and out degree map
+		state = initializer.getProbabilityMap();
+		outDegrees = initializer.getOutDegreeMap();
+		
+		// Number of valid users
+		System.out.println(state.size() + " users found.");
+		
+		// Verify all outDegrees > 0
+		for (int key : outDegrees.keySet()) {
+			if (outDegrees.get(key) == 0) {
+				System.out.println(key + " has out degree 0.");
+				System.exit(-1);
+			}
+		}
+		
+		// Iterate until we hit epsilon min
+		int count = 0;
+		double epsilon = Double.MAX_VALUE;
+		while (epsilon > MIN_DELTA) {
+			MatrixIterator iterator = new MatrixIterator(state, outDegrees);
+			try {
+				for (File file : files) {
+					LogFile log = new LogFile(file.getPath());
+					log.readAll(iterator);
+				}
+			} catch (Exception e) {
+				e.printStackTrace();
+				System.exit(-1);
+			}
+			
+			Int2DoubleOpenHashMap nextState = iterator.getProbabilityMap();
+			epsilon = computeEpsilon(state, nextState);
+			state = nextState;
+			
+			// Report and output vector to file
+			long time = new Date().getTime();
+			System.out.println("Iteration " + count++ + " epsilon " + epsilon + " " + ((time - start)/1000) + " seconds.");
+			
+		}
+		
+		// Output the vector to file
+	}
+	
+	// Assumes same key sets!
+	private static double computeEpsilon(Int2DoubleOpenHashMap before, Int2DoubleOpenHashMap after) {
+		double sum = 0.0;
+		for (int key : before.keySet()) {
+			double delta = before.get(key) - after.get(key);
+			sum += delta * delta;
+		}
+		return sum;
+	}
+}

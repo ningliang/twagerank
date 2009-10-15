@@ -1,0 +1,14 @@
+package pruner;
+
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class IdentifierSet implements ResultHandler {
+	Int2ByteOpenHashMap idMap = new Int2ByteOpenHashMap();
+	
+	public void handleResult(Result result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

@@ -1,0 +1,17 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class Initializer implements ResultHandler {
+	// Int2DoubleOpenHashMap
+	// Int2IntOpenHashMap
+	
+	// 
+	
+	public void handleResult(Result result) {
+		// TODO Auto-generated method stub
+	
+	}
+	
+}

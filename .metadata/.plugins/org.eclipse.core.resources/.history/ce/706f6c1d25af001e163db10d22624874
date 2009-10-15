@@ -1,0 +1,10 @@
+package twagerank;
+
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class VectorInitializer implements ResultHandler {
+	public void handleResult(Result result) {
+		
+	}
+}

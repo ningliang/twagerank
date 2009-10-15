@@ -1,0 +1,32 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import it.unimi.dsi.fastutil.ints.IntArrayList;
+import it.unimi.dsi.fastutil.ints.IntList;
+import logutils.Result;
+
+public class VectorInitializer implements ResultHandler {
+
+	private Int2DoubleOpenHashMap rankVector = null;
+	private IntList idList = null;
+	private double norm;
+	
+	public VectorInitializer() {
+		this.idList = new IntArrayList();
+	}
+	
+	public void handle(Result result) { 
+		if (result.isSuccessful()) idList.add(result.getId());
+	}
+	
+	public void initialize() {
+		this.rankVector = new Int2DoubleOpenHashMap(idList.size());
+		norm = 1.0/this.rankVector.size();
+		for (int id : this.idList) this.rankVector.put(id, norm);
+	}
+	
+	public int getCount() { return this.idList.size(); }
+	public double getNorm() { return this.norm; }
+	public Int2DoubleOpenHashMap getVector() { return this.rankVector; }
+
+}

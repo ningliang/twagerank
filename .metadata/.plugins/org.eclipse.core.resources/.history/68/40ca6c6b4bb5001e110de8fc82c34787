@@ -1,0 +1,29 @@
+package pruner;
+
+import java.io.File;
+import java.util.LinkedList;
+import java.util.List;
+
+import utils.Utility;
+
+public class Pruner {
+	public static void main(String[] args) {
+		// Usage
+		if (args.length != 1) {
+			System.out.println("usage: TwageRank <dir>");
+			System.exit(1);
+		}
+		
+		List<File> files = Utility.getFiles(args[0]);
+		for (File file : files) {
+			
+		}
+	}
+	
+	// Pass 1
+		// Save all valid keys
+	// Pass 2
+		// Enqueue into writer that flushes every 10000
+		// Writer needs to increment file names every 1000000
+		
+}

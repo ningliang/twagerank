@@ -1,0 +1,4 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<session version="1.0">
+<refactoring accessors="true" comment="Delete 4 element(s) from project &apos;TwageRank&apos;&#x0A;- Original project: &apos;TwageRank&apos;&#x0A;- Original elements:&#x0A;     twagerank.PageRank.java&#x0A;     twagerank.ResultHandler.java&#x0A;     twagerank.VectorInitializer.java&#x0A;     twagerank.VectorTransformer.java" description="Delete elements" element1="/src&lt;twagerank{VectorInitializer.java" element2="/src&lt;twagerank{VectorTransformer.java" element3="/src&lt;twagerank{PageRank.java" element4="/src&lt;twagerank{ResultHandler.java" elements="4" flags="589830" id="org.eclipse.jdt.ui.delete" resources="0" stamp="1254461193281" subPackages="false" version="1.0"/>
+</session>

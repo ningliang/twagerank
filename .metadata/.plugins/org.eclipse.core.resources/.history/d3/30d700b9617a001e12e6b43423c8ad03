@@ -1,0 +1,14 @@
+package twagerank;
+
+import logutils.Result;
+
+public class VectorInitializer implements ResultHandler {
+
+	
+	
+	public void handle(Result result) {
+		// TODO Auto-generated method stub
+		
+	}
+
+}

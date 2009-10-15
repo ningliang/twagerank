@@ -1,0 +1,21 @@
+package generator;
+
+import java.io.DataOutputStream;
+
+import log_utils.Result;
+
+public class Generator {
+	public static void main(String[] args) {
+		
+	}
+	
+	public static void writeResult(DataOutputStream out, Result result) {
+		out.writeInt(queuedResult.getId());
+		out.writeInt(queuedResult.getStatus().toInt());
+		if (queuedResult.isSuccessful()) {
+			out.writeInt(queuedResult.getFollowerIds().length);
+			for (int id : queuedResult.getFollowerIds()) out.writeInt(id);
+		}
+		out.flush();
+	}
+}

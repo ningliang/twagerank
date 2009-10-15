@@ -1,0 +1,23 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class VectorInitializer implements ResultHandler {
+	Int2DoubleOpenHashMap vector = new Int2DoubleOpenHashMap();
+	Boolean normalized = false;
+	
+	public void handleResult(Result result) { 
+		if (result.isSuccessful()) vector.put(result.getId(), 1.0); 
+	}	
+	
+	// Return the normalized vector
+	public Int2DoubleOpenHashMap getVector() {
+		if (!normalized) {
+			double size = (double)vector.size();
+			for (int key : vector.keySet()) vector.put(key, vector.get(key) / size);
+		}
+		return this.vector; 
+	}
+}

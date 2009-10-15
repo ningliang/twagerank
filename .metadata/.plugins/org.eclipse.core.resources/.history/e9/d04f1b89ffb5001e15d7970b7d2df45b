@@ -1,0 +1,47 @@
+package log_utils;
+
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.EOFException;
+import java.io.FileInputStream;
+import java.io.IOException;
+
+public class LogFile {
+	String filePath = null;
+	
+	// Constructor 
+	public LogFile(String filePath) {
+		if (filePath == null || filePath.length() == 0) throw new IllegalArgumentException("Missing or empty file path");
+		this.filePath = filePath; 
+	}
+		
+	public void readAll(ResultHandler resultHandler) throws IOException {
+		if (resultHandler == null) throw new IllegalArgumentException("Missing handler");
+		DataInputStream stream = new DataInputStream(new BufferedInputStream(new FileInputStream(this.filePath)));
+		Result result = null;
+		while ((result = readResult(stream)) != null) resultHandler.handleResult(result);
+		stream.close();
+	}
+	
+	// Read a result, return null if EOF
+	private Result readResult(DataInputStream stream) throws IOException {
+		Result result = null;
+		try {
+			int id = stream.readInt();			
+			if (id != -1) {			
+				Status status = Status.fromInt(stream.readInt());
+				if (status == Status.SUCCESS) {
+					int length = stream.readInt();
+					int[] followerIds = new int[length];
+					for (int i = 0; i < followerIds.length; i++) followerIds[i] = stream.readInt();
+					result = new Result(id, status, followerIds);
+				} else {
+					result = new Result(id, status);
+				}
+			}
+		} catch (EOFException e) { 
+			result = null; 
+		}		
+		return result;
+	}
+}

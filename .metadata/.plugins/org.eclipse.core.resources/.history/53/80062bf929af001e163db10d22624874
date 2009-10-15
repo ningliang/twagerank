@@ -1,0 +1,19 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class VectorTransformer implements ResultHandler {
+	Int2DoubleOpenHashMap vector;
+	
+	public VectorTransformer(Int2DoubleOpenHashMap vector) { 
+		this.vector = vector; 
+	}
+	
+	public void handleResult(Result result) {
+		
+	}
+
+	public Int2DoubleOpenHashMap getVector() { return this.vector; }
+}

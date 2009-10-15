@@ -1,0 +1,37 @@
+package pruner;
+
+import it.unimi.dsi.fastutil.ints.Int2ByteOpenHashMap;
+
+import java.io.File;
+import java.util.List;
+
+import utils.Utility;
+
+public class Pruner {
+	public static void main(String[] args) {
+		// Usage
+		if (args.length != 2) {
+			System.out.println("usage: Pruner <indir> <outdir>");
+			System.exit(1);
+		}
+		
+		List<File> files = Utility.getFiles(args[0]);
+		Int2ByteOpenHashMap ids = new Int2ByteOpenHashMap();
+		
+		try {
+			for (File file : files) {
+				
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.out.println("Done");
+		}
+	}
+	
+	// Pass 1
+		// Save all valid keys
+	// Pass 2
+		// Enqueue into writer that flushes every 10000
+		// Writer needs to increment file names every 1000000
+		
+}

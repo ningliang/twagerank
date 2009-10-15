@@ -1,0 +1,12 @@
+package twagerank;
+
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class VectorInitializer implements ResultHandler {
+	Map<Integer, Double> vector = new Int2DoubleOpenHashMap();
+	
+	public void handleResult(Result result) {
+		
+	}
+}

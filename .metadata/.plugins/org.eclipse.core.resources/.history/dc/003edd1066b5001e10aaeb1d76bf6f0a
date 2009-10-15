@@ -1,0 +1,63 @@
+package follower_histogram;
+
+import java.io.File;
+import java.util.LinkedHashMap;
+import java.util.List;
+
+import log_utils.LogFile;
+import log_utils.Result;
+import log_utils.ResultHandler;
+import utils.Utility;
+
+public class FollowerHistogram {
+	public static void main(String[] args) {
+		// Setup
+		if (args.length != 2) {
+			System.out.println("Usage: FollowerHistogram <bucket_size> <dir>");
+			System.exit(-1);
+		}
+		
+		// Get bucket size
+		int bucketSize = Integer.parseInt(args[0]);
+		if (bucketSize <= 0) {
+			System.out.println("Bucket size must be greater than or equal to 0.");
+			System.exit(-1);
+		}
+		
+		// Get files and iterate
+		List<File> files = Utility.getFiles(args[1]);
+		Histogram histogram = new Histogram(bucketSize);
+		try {
+			for (File file : files) {
+				LogFile log = new LogFile(file.getPath());
+				log.readAll(histogram);
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		
+		LinkedHashMap<Integer, Integer> buckets = histogram.getBuckets();
+		for (Integer key : buckets.keySet()) System.out.println(key + " " + buckets.get(key));
+	}
+}
+
+class Histogram implements ResultHandler {
+	private int bucketSize;
+	private int[] buckets;
+	
+	public Histogram(int bucketSize) { this.bucketSize = bucketSize; }
+	
+	public void handleResult(Result result) {
+		int bucketKey = result.getFollowerIds().length / bucketSize;
+		
+		
+		if (!buckets.containsKey(bucketKey)) {
+			for (int i = 0; i <= bucketKey; i++) if (!buckets.containsKey(i)) buckets.put(i, 0);
+		}
+		buckets.put(bucketKey, buckets.get(bucketKey) + 1);
+	}
+	
+	public int getBucketSize() { return this.bucketSize; }
+	public LinkedHashMap<Integer, Integer> getBuckets() { return this.buckets; }
+}

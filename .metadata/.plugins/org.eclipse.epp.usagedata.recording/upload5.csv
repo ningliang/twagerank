@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+started,bundle,org.eclipse.jdt.apt.core,3.3.200.v20090528-1135,"org.eclipse.jdt.apt.core",1248664251502
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664252215
+error,log,,,"Could not create action delegate for id: com.android.ide.eclipse.adt.project.NewXmlFileWizardAction",1248664254363
+error,log,,,"Plug-in com.android.ide.eclipse.adt was unable to load class com.android.ide.eclipse.adt.project.NewXmlFileWizardAction.",1248664254364
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664259884
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664261667
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664263047
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664274812
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.paste",1248664276276
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664279722
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664287952
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664291567
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.selectAll",1248664304316
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664309445
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664314751
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664314886
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664318177
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.selectAll",1248664319811
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664321349
+started,bundle,org.eclipse.compare.core,3.5.0.I20090430-0408,"org.eclipse.compare.core",1248664322147
+opened,editor,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.CompilationUnitEditor",1248664322182
+activated,editor,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.CompilationUnitEditor",1248664322301
+started,bundle,org.eclipse.core.variables,3.2.200.v20090521,"org.eclipse.core.variables",1248664322777
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1248664350327
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664352325

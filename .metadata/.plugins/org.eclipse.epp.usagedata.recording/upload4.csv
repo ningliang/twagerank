@@ -1,0 +1,26 @@
+what,kind,bundleId,bundleVersion,description,time
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1248663933824
+activated,view,org.eclipse.jdt.ui,3.5.0.v20090604,"org.eclipse.jdt.ui.PackageExplorer",1248663933843
+closed,view,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.internal.introview",1248663933856
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664008892
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664168168
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664171528
+executed,command,org.eclipse.ui,3.5.0.I20090604-2000,"org.eclipse.ui.edit.selectAll",1248664174888
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664175134
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664177421
+started,bundle,org.eclipse.debug.core,3.5.0.v20090526-1600,"org.eclipse.debug.core",1248664181392
+started,bundle,org.eclipse.jdt.launching,3.5.0.v20090527,"org.eclipse.jdt.launching",1248664181410
+started,bundle,org.eclipse.jdt.launching.macosx,3.2.0.v20090527,"org.eclipse.jdt.launching.macosx",1248664181433
+started,bundle,org.eclipse.core.filesystem,1.2.0.v20090507,"org.eclipse.core.filesystem",1248664249774
+error,log,,,"Internal Error",1248664249879
+started,bundle,org.eclipse.compare,3.5.0.I20090514-0808,"org.eclipse.compare",1248664250223
+started,bundle,org.tigris.subversion.subclipse.ui,1.4.8,"org.tigris.subversion.subclipse.ui",1248664250252
+started,bundle,org.tigris.subversion.clientadapter.javahl,1.5.6.1,"org.tigris.subversion.clientadapter.javahl",1248664250287
+started,bundle,org.tigris.subversion.clientadapter.svnkit,1.5.6.1,"org.tigris.subversion.clientadapter.svnkit",1248664250289
+activated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664250334
+started,bundle,com.android.ide.eclipse.ddms,0.9.1.v200905011822-1621,"com.android.ide.eclipse.ddms",1248664251051
+started,bundle,com.android.ide.eclipse.adt,0.9.1.v200905011822-1621,"com.android.ide.eclipse.adt",1248664251131
+deactivated,workbench,org.eclipse.ui.workbench,3.5.0.I20090603-2000,"",1248664251151
+started,bundle,org.tmatesoft.svnkit,1.2.3.5521,"org.tmatesoft.svnkit",1248664251153
+started,bundle,org.eclipse.ltk.core.refactoring,3.5.0.v20090513-2000,"org.eclipse.ltk.core.refactoring",1248664251270
+started,bundle,org.eclipse.ltk.ui.refactoring,3.4.100.v20090604,"org.eclipse.ltk.ui.refactoring",1248664251271

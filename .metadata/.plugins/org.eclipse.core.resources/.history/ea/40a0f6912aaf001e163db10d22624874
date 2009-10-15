@@ -1,0 +1,27 @@
+package twagerank;
+
+import it.unimi.dsi.fastutil.ints.Int2DoubleOpenHashMap;
+import logutils.Result;
+import logutils.ResultHandler;
+
+public class VectorTransformer implements ResultHandler {
+	private final static ALPHA = 0.15;
+	private final static BETA = 1.0 - ALPHA;
+	Int2DoubleOpenHashMap initial;
+	Int2DoubleOpenHashMap transformed;
+	
+	public VectorTransformer(Int2DoubleOpenHashMap vector) { 
+		this.initial = vector; 
+		// Initialize the transformed vector
+	}
+	
+	// AFTER work
+	public Int2DoubleOpenHashMap getTransformedVector() { 
+		return this.transformed;
+	}
+	
+	// DURING work
+	public void handleResult(Result result) {
+		
+	}
+}

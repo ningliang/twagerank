@@ -1,0 +1,32 @@
+package twage_rank;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class MatrixIterator implements ResultHandler {
+	private static final double RANDOM_JUMP = 0.15;
+	
+	private Int2DoubleOpenHashMap before;
+	private Int2IntOpenHashMap outDegrees;
+	private Int2DoubleOpenHashMap after = new Int2DoubleOpenHashMap();
+	
+	public MatrixIterator(Int2DoubleOpenHashMap before, Int2IntOpenHashMap outDegrees) {
+		this.before = before;
+		this.outDegrees = outDegrees;
+		
+		double sum = 0.0;
+		for (int key : before.keySet()) sum += before.get(key);
+		double average = sum / ((double) before.size());
+		double jumpFactor = RANDOM_JUMP * average;
+		for (int key : before.keySet()) after.put(key, jumpFactor);
+	}
+	
+	public void handleResult(Result result) {
+		double sum = after.get(result.getId());
+		for (int id : result.getFollowerIds()) sum += before.get(id) / ((double) outDegree.gets(id));
+		after.put(id, (1.0 - RANDOM_JUMP) * sum);
+		// sum = after(id)
+		// Loop through results (they should all be valid). sum += before(id) * (1 / outDegree(id))
+		// Set the after(id) = sum
+	}
+}

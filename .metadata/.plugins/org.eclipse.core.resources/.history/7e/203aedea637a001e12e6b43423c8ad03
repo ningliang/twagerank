@@ -1,0 +1,8 @@
+package twagerank;
+
+public class VectorTransformer {
+	private Int2DoubleOpenHashMap rankVector = null;
+	private double squaredAcc = 0.0;
+	
+	public VectorTransformer(Int2DoubleOpenHashMap rankVector) { this.rankVector = rankVector; }
+}

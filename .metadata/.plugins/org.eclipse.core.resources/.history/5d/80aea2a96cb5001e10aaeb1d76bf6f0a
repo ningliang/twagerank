@@ -1,0 +1,117 @@
+package pruner;
+
+import java.io.BufferedOutputStream;
+import java.io.DataOutputStream;
+import java.io.FileOutputStream;
+import java.util.Date;
+import java.util.LinkedList;
+import java.util.List;
+
+import log_utils.Result;
+import log_utils.ResultHandler;
+
+public class FilteringLogger implements ResultHandler {
+	private static final int FLUSH_THRESHOLD = 100000;
+	private static final int SEGMENT_THRESHOLD = 1000000;
+	
+	private String dir;
+	private byte[] filterMap;
+	
+	private int fileCount = 0;
+	private int thresholdCount = 0;
+	private int writeCount = 0;
+	private long timeStamp = new Date().getTime();
+	private List<Result> writeQueue = new LinkedList<Result>();	
+	
+	private DataOutputStream out;
+	
+	public FilteringLogger(String dir, byte[] filterMap) {
+		try {
+			this.dir = dir;
+			this.out = nextFile();
+			this.filterMap = filterMap;
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
+
+	public void handleResult(Result result) {
+		// Filtering - remove all invalid ids
+		if (valid(result.getId())) {
+			// System.out.println(result.getId() + " " + this.writeQueue.size() + " " + result.getFollowerIds().length);
+			
+			int[] filteredIds = null;
+			int count = 0;
+			if (result.isSuccessful()) {
+				int[] idHolder = new int[result.getFollowerIds().length];
+				for (int id : result.getFollowerIds()) if (valid(id)) idHolder[count++] = id;
+				filteredIds = new int[count];
+				for (int i = 0; i < count; i++) filteredIds[i] = idHolder[i];
+			}
+			
+			Result filteredResult = new Result();
+			filteredResult.setId(result.getId());
+			filteredResult.setStatus(result.getStatus());
+			filteredResult.setFollowerIds(filteredIds);
+			
+			this.writeQueue.add(filteredResult);
+			
+			if (this.writeQueue.size() > FLUSH_THRESHOLD) flushQueue();
+		}	
+	}
+	
+	public void flushQueue() {
+		try {
+			for (Result queuedResult : writeQueue) {
+				this.out.writeInt(queuedResult.getId());
+				this.out.writeInt(queuedResult.getStatus().toInt());
+				if (queuedResult.isSuccessful()) {
+					this.out.writeInt(queuedResult.getFollowerIds().length);
+					for (int id : queuedResult.getFollowerIds()) this.out.writeInt(id);
+				}
+				this.out.flush();
+				
+				// Increment counters and segment on threshold
+				this.writeCount++;
+				this.thresholdCount++;
+				if (this.thresholdCount > SEGMENT_THRESHOLD) {
+					this.out.close();
+					this.out = nextFile();
+					this.thresholdCount = 0;
+				}
+			}			
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		this.writeQueue.clear();
+		System.out.println("Wrote " + writeCount + " so far.");
+	}
+	
+	public void close() {
+		try {
+			this.out.flush();
+			this.out.close();
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+	}
+	
+	private Boolean valid(int id) {
+		return this.filterMap[id] != 0;
+	}
+	
+	private DataOutputStream nextFile() {
+		DataOutputStream retval = null;
+		try {
+			String next = dir + "/" + timeStamp + "_" + Integer.toString(fileCount++) + ".txt";
+			retval = new DataOutputStream(new BufferedOutputStream(new FileOutputStream(next)));
+		} catch (Exception e) {
+			e.printStackTrace();
+			System.exit(-1);
+		}
+		return retval;
+	}
+}
